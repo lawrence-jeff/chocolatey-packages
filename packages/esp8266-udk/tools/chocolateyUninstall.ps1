@@ -18,7 +18,7 @@ if ((Test-Path -path $symLinkName)) {
     Start-ChocolateyProcessAsAdmin "reparsepoint delete $symLinkName" "fsutil.exe"
   } 
   Write-Debug "Cleaning up $$symLinkName"
-  Start-ChocolateyProcessAsAdmin "del /Q /S /F $symLinkName" "cmd.exe"
+  Start-ChocolateyProcessAsAdmin "/c del /Q /S /F $symLinkName" "cmd.exe"
 }
 
 
@@ -52,4 +52,4 @@ if ( $uninstallExe ) {
 # $symLinkName = $(Join-Path $installDir 'sdk') 
 # $symLinkTarget = $(Join-Path $installDir 'ESP8266_SDK')
 # Start-ChocolateyProcessAsAdmin "$(Join-Path ${installDir})" "/SILENT"
-# #Start-ChocolateyProcessAsAdmin "mklink.exe /D $(Join-Path $installDir 'sdk') $(Join-Path $installDir 'ESP8266_SDK')" "cmd.exe"
+# #Start-ChocolateyProcessAsAdmin "/c mklink.exe /D $(Join-Path $installDir 'sdk') $(Join-Path $installDir 'ESP8266_SDK')" "cmd.exe"
