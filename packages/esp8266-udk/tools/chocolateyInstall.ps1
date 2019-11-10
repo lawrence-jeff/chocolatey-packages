@@ -20,13 +20,13 @@ if ((Test-Path -path $installDir)) {
     Start-ChocolateyProcessAsAdmin "reparsepoint delete $symLinkName" "fsutil.exe"
   }
   Write-Debug "Cleaning up $$symLinkName"
-  Start-ChocolateyProcessAsAdmin "del /Q /S /F $symLinkName" "cmd.exe"  
+  Start-ChocolateyProcessAsAdmin "/c del /Q /S /F $symLinkName" "cmd.exe"  
 
   if ((Test-Path -path $(Join-Path $installDir "unins000.exe"))) {
     Remove-Item $(Join-Path $installDir "unins000.exe")
   }
   # Write-Debug "Cleaning up $installDir"
-  # Start-ChocolateyProcessAsAdmin "del /Q /S /F $installDir" "cmd.exe"
+  # Start-ChocolateyProcessAsAdmin "/c del /Q /S /F $installDir" "cmd.exe"
 
 } else {
   Install-ChocolateyPackage "$packageName" "$installerType" "$silentArgs" "$url"
@@ -35,7 +35,7 @@ if ((Test-Path -path $installDir)) {
 
   Write-Debug "Creating sdk symlink"
   Start-ChocolateyProcessAsAdmin "if(Test-Path $symLinkName){Remove-Item $symLinkName}; $env:comspec /c mklink /D $symLinkName $symLinkTarget" -validExitCodes @(0,121)
-  #Start-ChocolateyProcessAsAdmin "mklink.exe /D $(Join-Path $installDir 'sdk') $(Join-Path $installDir 'ESP8266_SDK')" "cmd.exe"
+  #Start-ChocolateyProcessAsAdmin "/c mklink.exe /D $(Join-Path $installDir 'sdk') $(Join-Path $installDir 'ESP8266_SDK')" "cmd.exe"
 }
 
 
